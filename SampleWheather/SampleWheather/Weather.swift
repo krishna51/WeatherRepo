@@ -20,7 +20,6 @@ class Weather {
     static let kTempMaxKey = "temp_max"
     static let kNameKey = "name"
     static let kCodKey = "cod"
-    //static let kMessageKey = "message"
 
     
     var main = ""
@@ -32,7 +31,6 @@ class Weather {
     var lowK: Float?
     var cityName = ""
     var respCode = ""
-    //var msgCode = ""
     
     var temperatureF: Int? {
         get {
@@ -74,13 +72,7 @@ class Weather {
         if let weatherKeyFailCode = jsonDictionary[Weather.kCodKey] as? String {
                 self.respCode = weatherKeyFailCode
         }
-//        if let weatherKeyFailMsgCode = jsonDictionary[Weather.kMessageKey] as? String {
-//            self.msgCode = weatherKeyFailMsgCode
-//            print("msgCode code 55555")
-//            print(self.msgCode)
-//        }
 
-        
         if let arrayWeatherKey = jsonDictionary[Weather.kWeatherKey] as? [[String : AnyObject]] {
             if let main = arrayWeatherKey[0][Weather.kMainKey] as? String {
                 self.main = main

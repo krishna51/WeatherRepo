@@ -51,24 +51,18 @@ class ViewController: UIViewController, UISearchBarDelegate {
             } else {
                 do {
                     let resultObj = try JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.allowFragments)
-                    print(resultObj)
                     var weatherObject: Weather?
-                    
                     if let weatherDictionary = resultObj as? [String : AnyObject] {
-                        print(weatherDictionary)
-
                         weatherObject = Weather(jsonDictionary: weatherDictionary)
-                        print(weatherObject?.respCode as Any)
-                        
-                        
                         if (weatherDictionary[Weather.kCodKey] as? String) != weatherObject?.respCode {
                             DispatchQueue.main.async {
                                 // Update UI
                                 self.cityNameLabel.text = weatherObject?.cityName
+                                
                                 if let temperatureF = weatherObject?.temperatureF {
                                     self.temperatureLabel.text = String(temperatureF) + " °F"
                                 } else {
-                                    self.temperatureLabel.text = "No temperature found"
+                                    self.temperatureLabel.text =  "No Temp"
                                 }
                                 if let highF = weatherObject?.highF {
                                     self.highTempLabel.text = String(highF)
@@ -88,9 +82,13 @@ class ViewController: UIViewController, UISearchBarDelegate {
                         else {
                             DispatchQueue.main.async {
                               self.cityNameLabel.text = "No City Found"
-                              print(self.cityNameLabel.text!)
                               self.iconImageView.image = nil
+                              self.temperatureLabel.text =  "No Temp"
+                              self.highTempLabel.text = "0"
+                              self.lowTempLabel.text = "0"
+                              self.descriptionLabel.text = ""
                             }
+                            
                         }
                     }
 
